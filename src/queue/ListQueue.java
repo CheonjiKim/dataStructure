@@ -28,4 +28,7 @@ public class ListQueue<E> implements QueueInterface<E> {
     public void dequeueAll() {
         list.clear();
     }
+
+    
+     
 }

@@ -1,70 +1,56 @@
-import java.io.LineNumberInputStream;
-import java.security.Principal;
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		sc.nextLine();
-		int[] dataTypeArr = new int[N]; // 0 == q, 1 == s
-		int[] queStArr = new int[N];
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int N = Integer.parseInt(br.readLine());
+		int[] numsArr = new int[N];
+		
+		int i;
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		for (i = 0; i < N; i++) numsArr[i] = Integer.parseInt(st.nextToken()); // N개의 수 담기
+		Arrays.sort(numsArr); // 정렬하기
+		System.out.println(Arrays.toString(numsArr));
+		// 배열에서 좋은 수는 최소 2번째 index에서부터 존재할 수 있다.
+		
+		// k k k k k k k k k (k + 1) (k + 2)
 
-		int i, j;
-		for(i = 0; i < N; i++) dataTypeArr[i] = sc.nextInt();
-		sc.nextLine();
-		for(i = 0; i < N; i++) queStArr[i] = sc.nextInt();
-		sc.nextLine();
-		int M = sc.nextInt();
-		int[] insrtArr = new int[M];
-		int[] ansArr = new int[M];
-		sc.nextLine();
-		for(i = 0; i < M; i++) insrtArr[i] = sc.nextInt();
+		int startIndex = 0, endIndex = N - 1, currIndex = 0, count = 0;
+		int start = numsArr[startIndex];
+		int end = numsArr[endIndex];
+		int curr = numsArr[currIndex];
 
-		int cntVal = 2;
-		int tmp, next, sync;
+		for (i = 0; i < N; i++) {
+			startIndex = 0;
+			endIndex = N - 1;
 
-		for (i = 0; i < N; i++) { // 큐스택에 값을 하나 씩 집어넣자.
-			if (dataTypeArr[i] == 0){ // 큐 인경우
-				tmp = queStArr[i];
-				queStArr[i] = cntVal;
-				next = tmp;
-			} else { // 스택인 경우
-				//tmp = queStArr[i];
-				queStArr[i] = cntVal;
-				next = cntVal;
+			while(currIndex < N) {
+				if (startIndex == currIndex) {
+					startIndex++;
+				}
+				if (endIndex == currIndex) {
+					endIndex--;
+				}
+				if (start == end) { // curr는 좋은 수가 아니다.
+					currIndex++;
+					break; 
+				} 
+				if (curr > (start + end)) {
+					startIndex++;
+				} else if (curr < (start + end)) {
+					endIndex--;
+				} else { // curr == start + end
+					count++;
+					currIndex++;
+				}
 			}
-			
-			queStArr[i + 1] = next; 
-
 		}
+		System.out.println(count);
 	}
 }
-
-class queueStack {
-	private int inputvalue, outputValue;
-	public int[] qstArr;
-	public int[] qOrSArr;
-
-	queueStack(int len) { // 길이를 설정하여 큐스택 생성
-		qstArr = new int[len];
-	}
-
-	get(int inp) {
-		inputvalue = inp;
-		
-
-
-
-
-
-
-
-
-
-		
-		return outputValue;
-	}
-
-}
-

@@ -5,9 +5,9 @@ public class LinkedList<E> implements ListInterface<E> {
     private Node<E> head;
     private int numItems;
 
-    public LinkedList() { // »ý¼ºÀÚ
+    public LinkedList() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         numItems = 0;
-        head = new Node<>(null, null); // ´õ¹Ì Çìµå 
+        head = new Node<>(null, null); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
     }
 
     public void add(int index, E item) {
@@ -20,7 +20,7 @@ public class LinkedList<E> implements ListInterface<E> {
     }
 
     public void append(E item) {
-        Node<E> prevNode = head; // ´õ¹Ì ³ëµå
+        Node<E> prevNode = head; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         while (prevNode.next != null) prevNode = prevNode.next;
         Node<E> newNode = new Node<>(item, null);
         prevNode.next = newNode;
@@ -38,7 +38,7 @@ public class LinkedList<E> implements ListInterface<E> {
     }
 
     public boolean removeItem(E x) {
-        Node<E> currNode = head; // ´õ¹Ì Çìµå
+        Node<E> currNode = head; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         Node<E> prevNode;
         for (int i = 0; i < numItems; i++) {
             prevNode = currNode;
@@ -68,12 +68,12 @@ public class LinkedList<E> implements ListInterface<E> {
     public void set(int index, E x) {
         if (index >= 0 && index <= numItems - 1) {
             getNode(index).item = x;
-        } else { /* ¿¡·¯ Ã³¸® */ }
+        } else { /* ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ */ }
     }
 
     public final int NOT_FOUND = -12345;
     public int indexOf(E x) {
-        Node<E> currNode = head; // ´õ¹Ì ³ëµå
+        Node<E> currNode = head; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         int i;
         for (i = 0; i < numItems; i++) {
             currNode = currNode.next;
@@ -93,5 +93,6 @@ public class LinkedList<E> implements ListInterface<E> {
     public void clear() {
         numItems = 0;
         head = new Node<>(null, null);
-    }
+    }	
 }
+
