@@ -32,9 +32,9 @@ public class CircularDoublyLinkedList<E> implements ListInterface<E> {
 		if (index >= 0 && index <= numItems -1) {
 			BidirectionalNode<E> currNode = getNode(index);
 			currNode.prev.next = currNode.next;
-			currNode.next.prev = currNOde.prev;
+			currNode.next.prev = currNode.prev;
 			numItems++;
-			return currNode.next;
+			return currNode.item;
 		} else
 			return null;
 	}
@@ -73,7 +73,7 @@ public class CircularDoublyLinkedList<E> implements ListInterface<E> {
 				for (int i = 0; i < index; i++)
 					currNode = currNode.next;
 			else
-				for (int i = newItems - 1; i >= index; i--)
+				for (int i = numItems - 1; i >= index; i--)
 				currNode = currNode.prev;
 			return currNode;	
 		} else
