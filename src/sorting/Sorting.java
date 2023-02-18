@@ -4,7 +4,7 @@ public class Sorting {
     int A[];
     public Sorting(int B[]) {
         A = B;
-    }  
+    } 
     
     // 선택 정렬
     public void selectionSort() {
@@ -55,5 +55,72 @@ public class Sorting {
             A[loc + 1] = newItem;
         }
     }
-    
+
+    // 퀵 정렬
+
+    public void quickSort() {
+        qSort(0, A.length - 1);
+    }
+
+    private void qSort(int p, int r) {
+        if (p < r) {
+            int q = partition(p, r);
+            qSort(p, q - 1);
+            qSort(q + 1, r);
+        }
+    }
+
+    private int partition(int p, int r) {
+        int x = A[r];
+        int i = p - 1;
+        int tmp;
+        for (int j = p; j <= r - 1; j++) {
+            if (A[j] <= x) {
+                i++;
+                tmp = A[i];
+                A[i] = A[j];
+                A[j] = tmp;
+            }
+        }
+        tmp = A[i + 1];
+        A[i + 1] = A[r];
+        A[r] = tmp;
+        return i + 1;
+    }
+
+    public void heapSort() {
+        buildHeap();
+        int tmp;
+        for (int i = A.length - 1; i >= 1; i--) {
+            tmp = A[0];
+            A[0] = A[i];
+            A[i] = tmp;
+            percolateDown(0, i - 1);
+        }
+    }
+
+    private void buildHeap() {
+        if (A.length >= 2)
+            for (int i = (A.length - 2) / 2; i >= 0; i--)
+                percolateDown(i, A.length - 1);
+    }
+
+    private void percolateDown(int i, int n) {
+        // A[0...n-1]에서 A[i]를 루트로 스며내리기
+        int child = 2 * i + 1;
+        int rightChild = 2 * i + 2;
+        if (child <= n) {
+            if (rightChild <= n && (A[child] < A[rightChild])) // 두 자식 중 더 큰 자식을 가려내는 로직
+                child = rightChild;
+            if (A[i] < A[child]) {
+                int tmp = A[i];
+                A[i] = A[child];
+                A[child] = tmp;
+                percolateDown(child, n);
+            }
+        }
+    }
+
+
+
 }
